@@ -11,12 +11,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class DayAdapter extends BaseAdapter {
+public class MyAdapter extends BaseAdapter {
 
-    private List<DayBean> list;
+    private List<Day> list;
     private Context context;
 
-    public DayAdapter(List<DayBean> list, Context context) {
+    public MyAdapter(List<Day> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -27,7 +27,7 @@ public class DayAdapter extends BaseAdapter {
     }
 
     @Override
-    public DayBean getItem(int position) {
+    public Day getItem(int position) {
         return list.get(position);
     }
 
@@ -48,7 +48,7 @@ public class DayAdapter extends BaseAdapter {
             textView = (TextView) view;
         }
 
-        DayBean bean = getItem(position);
+        Day bean = getItem(position);
 
         textView.setText(bean.getDay() + "");
         textView.setGravity(Gravity.CENTER);

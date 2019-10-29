@@ -1,6 +1,6 @@
 package com.example.mycalender2;
 
-public class DayBean {
+public class Day {
     private int day;
     private int month;
     private int year;

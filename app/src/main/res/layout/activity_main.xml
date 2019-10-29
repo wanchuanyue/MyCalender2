@@ -5,8 +5,8 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tvCurrentDate"
-        android:text="2019-6-24"
+        android:id="@+id/nowdate"
+        android:text="2019"
         android:textSize="18sp"
         android:gravity="center"
         android:textStyle="bold"
@@ -124,8 +124,6 @@
         android:numColumns="7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-
     </GridView>
 
     <LinearLayout
@@ -134,7 +132,7 @@
         android:background="#f6f6e9">
 
         <TextView
-            android:id="@+id/tvPreMonth"
+            android:id="@+id/preMonth"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -151,7 +149,7 @@
             android:background="#000" />
 
         <TextView
-            android:id="@+id/tvNextMonth"
+            android:id="@+id/nextMonth"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

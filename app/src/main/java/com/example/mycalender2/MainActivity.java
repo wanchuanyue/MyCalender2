@@ -9,37 +9,36 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tvCurrentDate;
-    private TextView tvPreMonth;
-    private TextView tvNextMonth;
+    private TextView nowdate;
+    private TextView preMonth;
+    private TextView nextMonth;
     private GridView gv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // 初始化布局
+
         initView();
     }
 
     private void initView() {
-        tvCurrentDate = (TextView) findViewById(R.id.tvCurrentDate);
-        tvPreMonth = (TextView) findViewById(R.id.tvPreMonth);
-        tvNextMonth = (TextView) findViewById(R.id.tvNextMonth);
+        nowdate = (TextView) findViewById(R.id.nowdate);
+        preMonth = (TextView) findViewById(R.id.preMonth);
+        nextMonth = (TextView) findViewById(R.id.nextMonth);
         gv = (GridView) findViewById(R.id.gv);
-        // 初始化适配器
+
         initAdapter();
     }
 
     private void initAdapter() {
-        final List<DayBean> dataList = new ArrayList<>();
-        final DayAdapter adapter = new DayAdapter(dataList, this);
+        final List<Day> dataList = new ArrayList<>();
+        final MyAdapter adapter = new MyAdapter(dataList, this);
         gv.setAdapter(adapter);
 
         // 拿到日历对象，动态设置时间
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         updateAdapter(calendar, dataList, adapter);
 
-        tvPreMonth.setOnClickListener(new View.OnClickListener() {
+        preMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        tvNextMonth.setOnClickListener(new View.OnClickListener() {
+        nextMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void updateAdapter(Calendar calendar, List<DayBean> dataList, DayAdapter adapter) {
+    private void updateAdapter(Calendar calendar, List<Day> dataList, MyAdapter adapter) {
         dataList.clear();
         setCurrentData(calendar);
         // 得到本月一号的星期索引
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         int preMonthDays = getMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
         // 拿到上一个月的最后几天的天数
         for (int i = 0; i < weekIndex; i++) {
-            DayBean bean = new DayBean();
+            Day bean = new Day();
             bean.setYear(calendar.get(Calendar.YEAR));
             bean.setMonth(calendar.get(Calendar.MONTH) + 1);
             bean.setDay(preMonthDays - weekIndex + i + 1);
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         int currentDays = getMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
         // 拿到当月的天数
         for (int i = 0; i < currentDays; i++) {
-            DayBean bean = new DayBean();
+            Day bean = new Day();
             bean.setYear(calendar.get(Calendar.YEAR));
             bean.setMonth(calendar.get(Calendar.MONTH) + 1);
             bean.setDay(i + 1);
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         weekIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 
         for (int i = 0; i < 7 - weekIndex; i++) {
-            DayBean bean = new DayBean();
+            Day bean = new Day();
             bean.setYear(calendar.get(Calendar.YEAR));
             bean.setMonth(calendar.get(Calendar.MONTH) + 1);
             bean.setDay(i + 1);
@@ -135,14 +134,14 @@ public class MainActivity extends AppCompatActivity {
     }
     // 设置当前的时间
     private void setCurrentData(Calendar calendar) {
-        tvCurrentDate.setText(calendar.get(Calendar.YEAR) + "年" + (calendar.get(Calendar.MONTH) + 1) + "月");
+        nowdate.setText(calendar.get(Calendar.YEAR) + "年" + (calendar.get(Calendar.MONTH) + 1) + "月");
     }
     // 判断是否为闰年
     public boolean isRunYear(int y) {
         return y % 4 == 0 && y % 100 != 0 || y % 400 == 0;
     }
     // 格式化时间，设置时间很方便，也比较简单，学的很快
-    public static String getFormatTime(String p, Date t) {
+    public static String getFormatTime(String p, java.util.Date t) {
         return new SimpleDateFormat(p, Locale.CHINESE).format(t);
     }
     // 传入年和月得出当月的天数
