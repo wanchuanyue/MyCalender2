@@ -29,7 +29,7 @@
         <TextView
             android:layout_marginRight="1dp"
             android:background="#fff"
-            android:text="周日"
+            android:text="星期日"
             android:textStyle="bold"
             android:textColor="#000"
             android:gravity="center"
@@ -42,7 +42,7 @@
         <TextView
             android:layout_marginRight="1dp"
             android:background="#fff"
-            android:text="周一"
+            android:text="星期一"
             android:textStyle="bold"
             android:textColor="#000"
             android:gravity="center"
@@ -55,7 +55,7 @@
         <TextView
             android:layout_marginRight="1dp"
             android:background="#fff"
-            android:text="周二"
+            android:text="星期二"
             android:textStyle="bold"
             android:textColor="#000"
             android:gravity="center"
@@ -68,7 +68,7 @@
         <TextView
             android:layout_marginRight="1dp"
             android:background="#fff"
-            android:text="周三"
+            android:text="星期三"
             android:textStyle="bold"
             android:textColor="#000"
             android:gravity="center"
@@ -81,7 +81,7 @@
         <TextView
             android:layout_marginRight="1dp"
             android:background="#fff"
-            android:text="周四"
+            android:text="星期四"
             android:textStyle="bold"
             android:textColor="#000"
             android:gravity="center"
@@ -94,7 +94,7 @@
         <TextView
             android:layout_marginRight="1dp"
             android:background="#fff"
-            android:text="周五"
+            android:text="星期五"
             android:textStyle="bold"
             android:textColor="#000"
             android:gravity="center"
@@ -107,7 +107,7 @@
         <TextView
             android:layout_marginRight="1dp"
             android:background="#fff"
-            android:text="周六"
+            android:text="星期六"
             android:textStyle="bold"
             android:textColor="#000"
             android:gravity="center"
