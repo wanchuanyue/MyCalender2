@@ -1,11 +1,17 @@
 package com.example.mycalender2;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView preMonth;
     private TextView nextMonth;
     private GridView gv;
+    private TextView setMonth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         preMonth = (TextView) findViewById(R.id.preMonth);
         nextMonth = (TextView) findViewById(R.id.nextMonth);
         gv = (GridView) findViewById(R.id.gv);
+        setMonth = (TextView) findViewById(R.id.setMonth);
 
         initAdapter();
     }
@@ -61,6 +70,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+                updateAdapter(calendar, dataList, adapter);
+            }
+        });
+
+        setMonth.setOnClickListener(new View.OnClickListener() {
+            final String[] Month = new String[]{"一月","二月","三月"};
+            @Override
+            public void onClick(View v) {
+                //calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("设置月份");
+                builder.setView(R.layout.set_time);
+
+
+                builder.show();
+
                 updateAdapter(calendar, dataList, adapter);
             }
         });

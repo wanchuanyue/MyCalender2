@@ -10,8 +10,8 @@
         android:textSize="18sp"
         android:gravity="center"
         android:textStyle="bold"
-        android:textColor="#fff"
-        android:background="#fd5f00"
+        android:textColor="#000"
+        android:background="#fff"
         android:layout_width="match_parent"
         android:layout_height="40dp" />
 
@@ -131,35 +131,27 @@
         android:layout_height="wrap_content"
         android:background="#f6f6e9">
 
-        <TextView
+
+        <Button
             android:id="@+id/preMonth"
-            android:layout_width="0dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="上一月"
-            android:textColor="#000"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:text="上一月" />
 
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#000" />
+        <Button
+            android:id="@+id/setMonth"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="设置月份" />
 
-        <TextView
+        <Button
             android:id="@+id/nextMonth"
-            android:layout_width="0dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="下一月"
-            android:textColor="#000"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
+            android:text="下一月" />
     </LinearLayout>
+
+
+
 
 </LinearLayout>

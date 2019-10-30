@@ -39,14 +39,10 @@ public class MyAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         TextView textView;
-        // 使用缓存机制提高利用率
-        if (view == null) {
             textView = new TextView(context);
             textView.setPadding(5, 5, 5, 5);
-            view = textView;
-        } else {
-            textView = (TextView) view;
-        }
+
+
 
         Day bean = getItem(position);
 
@@ -56,14 +52,14 @@ public class MyAdapter extends BaseAdapter {
         textView.setTypeface(Typeface.DEFAULT_BOLD);
 
         if (bean.isCurrentDay()) {
-            textView.setBackgroundColor(Color.parseColor("#fd5f00"));
+            textView.setBackgroundColor(Color.RED);
             textView.setTextColor(Color.WHITE);
         } else if (bean.isCurrentMonth()) {
             textView.setBackgroundColor(Color.WHITE);
             textView.setTextColor(Color.BLACK);
         } else {
             // 通过 parseColor 方法得到的颜色不可以简写，必须写满六位
-            textView.setBackgroundColor(Color.parseColor("#aaaaaa"));
+            textView.setBackgroundColor(Color.GRAY);
             textView.setTextColor(Color.BLACK);
         }
         // 返回 view 或 textView 都行，因为都是同一个对象
