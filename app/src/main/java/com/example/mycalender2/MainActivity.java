@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -21,10 +22,11 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     private TextView nowdate;
-    private TextView preMonth;
-    private TextView nextMonth;
+    private Button preMonth;
+    private Button nextMonth;
     private GridView gv;
-    private TextView setMonth;
+    private Button setMonth;
+    private EditText newMonth;
 
 
     @Override
@@ -37,10 +39,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         nowdate = (TextView) findViewById(R.id.nowdate);
-        preMonth = (TextView) findViewById(R.id.preMonth);
-        nextMonth = (TextView) findViewById(R.id.nextMonth);
+        preMonth = (Button) findViewById(R.id.preMonth);
+        nextMonth = (Button) findViewById(R.id.nextMonth);
         gv = (GridView) findViewById(R.id.gv);
-        setMonth = (TextView) findViewById(R.id.setMonth);
+        setMonth = (Button) findViewById(R.id.setMonth);
+        newMonth = (EditText) findViewById(R.id.newMonth);
 
         initAdapter();
     }
@@ -78,15 +81,12 @@ public class MainActivity extends AppCompatActivity {
             final String[] Month = new String[]{"一月","二月","三月"};
             @Override
             public void onClick(View v) {
-                //calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("设置月份");
-                builder.setView(R.layout.set_time);
-
-
-                builder.show();
-
-                updateAdapter(calendar, dataList, adapter);
+                int s = Integer.parseInt(newMonth.getText().toString());
+                if (s>0&&s<13)
+                {
+                    calendar.set(Calendar.MONTH, s-1);//1月是0
+                    updateAdapter(calendar, dataList, adapter);
+                }
             }
         });
     }
