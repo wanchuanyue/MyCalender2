@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         setMonth.setOnClickListener(new View.OnClickListener() {
-            final String[] Month = new String[]{"一月","二月","三月"};
             @Override
             public void onClick(View v) {
                 int s = Integer.parseInt(newMonth.getText().toString());
