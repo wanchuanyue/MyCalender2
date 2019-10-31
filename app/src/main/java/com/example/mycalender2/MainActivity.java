@@ -1,17 +1,13 @@
 package com.example.mycalender2;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private GridView gv;
     private Button setMonth;
     private EditText newMonth;
+    private EditText newYear;
+
 
 
     @Override
@@ -44,9 +42,13 @@ public class MainActivity extends AppCompatActivity {
         gv = (GridView) findViewById(R.id.gv);
         setMonth = (Button) findViewById(R.id.setMonth);
         newMonth = (EditText) findViewById(R.id.newMonth);
+        newYear = (EditText) findViewById(R.id.newYear);
+
 
         initAdapter();
     }
+
+
 
     private void initAdapter() {
         final List<Day> dataList = new ArrayList<>();
@@ -80,10 +82,12 @@ public class MainActivity extends AppCompatActivity {
         setMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int s = Integer.parseInt(newMonth.getText().toString());
-                if (s>0&&s<13)
+                int nmouth = Integer.parseInt(newMonth.getText().toString());
+                int nyear = Integer.parseInt(newYear.getText().toString());
+                if (nmouth>0&&nmouth<13)
                 {
-                    calendar.set(Calendar.MONTH, s-1);//1月是0
+                    calendar.set(Calendar.MONTH, nmouth-1);//1月是0
+                    calendar.set(calendar.YEAR, nyear);
                     updateAdapter(calendar, dataList, adapter);
                 }
             }
@@ -182,5 +186,7 @@ public class MainActivity extends AppCompatActivity {
                 return 31;
         }
     }
+
+
 }
 
