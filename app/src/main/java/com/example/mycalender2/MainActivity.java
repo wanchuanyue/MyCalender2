@@ -2,6 +2,7 @@ package com.example.mycalender2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initAdapter() {
         final List<Day> dataList = new ArrayList<>();
-        final MyAdapter adapter = new MyAdapter(dataList, this);
+        final DayAdapter adapter = new DayAdapter(dataList, this);
         gv.setAdapter(adapter);
 
         // 拿到日历对象，动态设置时间
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void updateAdapter(Calendar calendar, List<Day> dataList, MyAdapter adapter) {
+    private void updateAdapter(Calendar calendar, List<Day> dataList, DayAdapter adapter) {
         dataList.clear();
         setCurrentData(calendar);
         // 得到本月一号的星期索引
@@ -186,7 +187,11 @@ public class MainActivity extends AppCompatActivity {
                 return 31;
         }
     }
-
+    public void note(View view){//查看备忘录
+        Intent intent=new Intent();
+        intent.setClass(MainActivity.this, NoteActivity.class);
+        startActivity(intent);
+    }
 
 }
 
