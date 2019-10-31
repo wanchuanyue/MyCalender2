@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         final DayAdapter adapter = new DayAdapter(dataList, this);
         gv.setAdapter(adapter);
 
-        final Calendar calendar = Calendar.getInstance();// 日历对象
+        final Calendar calendar = Calendar.getInstance();// 日历
 
         updateAdapter(calendar, dataList, adapter);
 
