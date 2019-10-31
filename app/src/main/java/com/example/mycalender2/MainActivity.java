@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setMonth = (Button) findViewById(R.id.setMonth);
         newMonth = (EditText) findViewById(R.id.newMonth);
         newYear = (EditText) findViewById(R.id.newYear);
+        note = (Button) findViewById(R.id.note);
 
         initAdapter();
     }
