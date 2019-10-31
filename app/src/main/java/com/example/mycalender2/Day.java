@@ -4,10 +4,8 @@ public class Day {
     private int day;
     private int month;
     private int year;
-    // 是否为当前月
-    private boolean currentMonth;
-    // 是否为今天
-    private boolean currentDay;
+    private boolean currentMonth;//当月
+    private boolean currentDay;//当天
 
     public int getDay() {
         return day;

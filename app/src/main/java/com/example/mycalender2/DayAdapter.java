@@ -42,8 +42,6 @@ public class DayAdapter extends BaseAdapter {
             textView = new TextView(context);
             textView.setPadding(5, 5, 5, 5);
 
-
-
         Day bean = getItem(position);
 
         textView.setText(bean.getDay() + "");
@@ -52,17 +50,15 @@ public class DayAdapter extends BaseAdapter {
         textView.setTypeface(Typeface.DEFAULT_BOLD);
 
         if (bean.isCurrentDay()) {
-            textView.setBackgroundColor(Color.RED);
+            textView.setBackgroundColor(Color.RED);//当天设为红底白字
             textView.setTextColor(Color.WHITE);
         } else if (bean.isCurrentMonth()) {
-            textView.setBackgroundColor(Color.WHITE);
+            textView.setBackgroundColor(Color.WHITE);//当月白底黑字
             textView.setTextColor(Color.BLACK);
         } else {
-            // 通过 parseColor 方法得到的颜色不可以简写，必须写满六位
-            textView.setBackgroundColor(Color.GRAY);
+            textView.setBackgroundColor(Color.GRAY);//非当月灰底黑字
             textView.setTextColor(Color.BLACK);
         }
-        // 返回 view 或 textView 都行，因为都是同一个对象
         return textView;
     }
 }
