@@ -56,10 +56,7 @@ public class MainActivity extends AppCompatActivity {
         final DayAdapter adapter = new DayAdapter(dataList, this);
         gv.setAdapter(adapter);
 
-        // 拿到日历对象，动态设置时间
-        // 使用日历对象可以帮我们避免一些问题，如 月数 的临界点问题，到的 12 月是再加 1 的话会自动
-        // 帮我们加到下一年去，同理从 1 月到 12 月也一样。
-        final Calendar calendar = Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();// 日历对象，动态设置时间
         setCurrentData(calendar);
 
         updateAdapter(calendar, dataList, adapter);
@@ -187,11 +184,7 @@ public class MainActivity extends AppCompatActivity {
                 return 31;
         }
     }
-    public void note(View view){//查看备忘录
-        Intent intent=new Intent();
-        intent.setClass(MainActivity.this, NoteActivity.class);
-        startActivity(intent);
-    }
+
 
 }
 
