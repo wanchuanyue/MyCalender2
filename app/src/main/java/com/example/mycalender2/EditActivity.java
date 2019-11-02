@@ -60,7 +60,8 @@ public class EditActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                Intent intent = new Intent(EditActivity.this,NoteActivity.class);
+                startActivity(intent);
             }
         });
 
