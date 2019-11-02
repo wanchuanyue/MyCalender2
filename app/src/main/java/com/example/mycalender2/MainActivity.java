@@ -58,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
         updateAdapter(calendar, dataList, adapter);
 
+        newMonth.setText(String.valueOf(calendar.get(Calendar.MONTH)+1));
+        newYear.setText(String.valueOf(calendar.get(Calendar.YEAR)));
+
+
         preMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
