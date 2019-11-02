@@ -1,5 +1,7 @@
 package com.example.mycalender2;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +20,7 @@ import java.util.List;
 public class NoteActivity extends AppCompatActivity {
 
     private ListView noteListView;
-    private Button addBtn;
+    private Button add;
 
     private List<NoteInfo> noteList = new ArrayList<>();
     private ListAdapter mListAdapter;
@@ -43,14 +46,14 @@ public class NoteActivity extends AppCompatActivity {
     }
     private void initView(){
         noteListView = findViewById(R.id.note_list);
-        addBtn = findViewById(R.id.add);
+        add = findViewById(R.id.add);
         getNoteList();
         mListAdapter = new ListAdapter(NoteActivity.this,noteList);
         noteListView.setAdapter(mListAdapter);
     }
 
     private void setListener(){
-        addBtn.setOnClickListener(new View.OnClickListener() {
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(NoteActivity.this,EditActivity.class);
@@ -68,6 +71,30 @@ public class NoteActivity extends AppCompatActivity {
                 intent.putExtras(bundle);
                 intent.setClass(NoteActivity.this, EditActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        noteListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                final NoteInfo noteInfo = noteList.get(position);
+                String title = "警告";
+                new AlertDialog.Builder(NoteActivity.this)
+                        .setMessage("确定要删除吗?")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Note.deleteNote(dbHelper,Integer.parseInt(noteInfo.getId()));
+                                noteList.remove(position);
+                                mListAdapter.refreshDataSet();
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        }).create().show();
+                return true;
             }
         });
 
