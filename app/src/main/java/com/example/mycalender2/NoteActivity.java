@@ -37,7 +37,6 @@ public class NoteActivity extends AppCompatActivity {
         dbHelper = new NoteDataBaseHelper(this,"MyNote.db",null,1);
 
         initView();
-        setListener();
 
         if (intent != null){
             getNoteList();
@@ -52,9 +51,7 @@ public class NoteActivity extends AppCompatActivity {
         getNoteList();
         mListAdapter = new ListAdapter(NoteActivity.this,noteList);
         noteListView.setAdapter(mListAdapter);
-    }
 
-    private void setListener(){
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +69,7 @@ public class NoteActivity extends AppCompatActivity {
 
         noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {//点击备忘录转向修改
                 NoteInfo noteInfo = noteList.get(position);
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
@@ -83,11 +80,10 @@ public class NoteActivity extends AppCompatActivity {
             }
         });
 
-        noteListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        noteListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {//长按备忘录删除
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 final NoteInfo noteInfo = noteList.get(position);
-                String title = "警告";
                 new AlertDialog.Builder(NoteActivity.this)
                         .setMessage("确定要删除吗?")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -106,9 +102,10 @@ public class NoteActivity extends AppCompatActivity {
                 return true;
             }
         });
-
     }
-    private void getNoteList(){
+
+
+    private void getNoteList(){//显示当前备忘录
         noteList.clear();
         Cursor allNotes = Note.getAllNotes(dbHelper);
         for (allNotes.moveToFirst(); !allNotes.isAfterLast(); allNotes.moveToNext()){
@@ -120,8 +117,6 @@ public class NoteActivity extends AppCompatActivity {
             noteList.add(noteInfo);
         }
     }
-
-
 
     public static NoteDataBaseHelper getDbHelper() {
         return dbHelper;

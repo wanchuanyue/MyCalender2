@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         newMonth.setText(String.valueOf(calendar.get(Calendar.MONTH)+1));
         newYear.setText(String.valueOf(calendar.get(Calendar.YEAR)));
 
-
         preMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,16 +101,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void updateAdapter(Calendar calendar, List<Day> dataList, DayAdapter adapter) {
+    private void updateAdapter(Calendar calendar, List<Day> dataList, DayAdapter adapter) {//显示日历列表
         dataList.clear();
-        setCurrentData(calendar);
+        setCurrentDate(calendar);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
-        int weekIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+        int weekIndex = calendar.get(Calendar.DAY_OF_WEEK);
 
 
         calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
-        int preMonthDays = getMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
-        for (int i = 0; i < weekIndex; i++) {
+        int preMonthDays = getMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));//上个月月末应显示在本月日历左上
+        for (int i = 1; i < weekIndex; i++) {
             Day bean = new Day();
             bean.setYear(calendar.get(Calendar.YEAR));
             bean.setMonth(calendar.get(Calendar.MONTH) + 1);
@@ -122,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
-        int currentDays = getMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
+        int currentDays = getMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));//显示本月
         for (int i = 0; i < currentDays; i++) {
             Day bean = new Day();
             bean.setYear(calendar.get(Calendar.YEAR));
@@ -140,9 +139,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
-        weekIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+        weekIndex = calendar.get(Calendar.DAY_OF_WEEK);//下个月月初应显示在本月日历右下
 
-        for (int i = 0; i < 7 - weekIndex; i++) {
+        for (int i = 1; i < 7 - weekIndex; i++) {
             Day bean = new Day();
             bean.setYear(calendar.get(Calendar.YEAR));
             bean.setMonth(calendar.get(Calendar.MONTH) + 1);
@@ -156,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
     }
 
-    private void setCurrentData(Calendar calendar) {
+    private void setCurrentDate(Calendar calendar) {
         nowdate.setText(calendar.get(Calendar.YEAR) + "年" + (calendar.get(Calendar.MONTH) + 1) + "月");
     }
 
