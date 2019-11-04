@@ -105,12 +105,12 @@ public class MainActivity extends AppCompatActivity {
         dataList.clear();
         setCurrentDate(calendar);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
-        int weekIndex = calendar.get(Calendar.DAY_OF_WEEK);
+        int weekIndex = calendar.get(Calendar.DAY_OF_WEEK)-1;
 
 
         calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
         int preMonthDays = getMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));//上个月月末应显示在本月日历左上
-        for (int i = 1; i < weekIndex; i++) {
+        for (int i = 0; i < weekIndex; i++) {
             Day bean = new Day();
             bean.setYear(calendar.get(Calendar.YEAR));
             bean.setMonth(calendar.get(Calendar.MONTH) + 1);
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
-        int currentDays = getMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));//显示本月
+        int currentDays = getMonth(calendar.get(Calendar.MONTH) +1, calendar.get(Calendar.YEAR));//显示本月
         for (int i = 0; i < currentDays; i++) {
             Day bean = new Day();
             bean.setYear(calendar.get(Calendar.YEAR));
@@ -139,9 +139,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
-        weekIndex = calendar.get(Calendar.DAY_OF_WEEK);//下个月月初应显示在本月日历右下
+        weekIndex = calendar.get(Calendar.DAY_OF_WEEK)-1;//下个月月初应显示在本月日历右下
 
-        for (int i = 1; i < 7 - weekIndex; i++) {
+        if(weekIndex!=0)
+        {for (int i = 0; i < 7 - weekIndex; i++) {
             Day bean = new Day();
             bean.setYear(calendar.get(Calendar.YEAR));
             bean.setMonth(calendar.get(Calendar.MONTH) + 1);
@@ -149,7 +150,8 @@ public class MainActivity extends AppCompatActivity {
             bean.setCurrentDay(false);
             bean.setCurrentMonth(false);
             dataList.add(bean);
-        }
+        }}
+
 
         adapter.notifyDataSetChanged();
         calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
@@ -171,8 +173,11 @@ public class MainActivity extends AppCompatActivity {
             case 2:
                 return runYear(y) ? 29 : 28;
             case 4:
+                return 30;
             case 6:
+                return 30;
             case 9:
+                return 30;
             case 11:
                 return 30;
             default:
